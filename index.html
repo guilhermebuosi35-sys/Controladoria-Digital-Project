@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+<body>
+  <!-- Menu de navegação -->
+  <nav style="
+    text-align:center;
+    background-color:#1f1f1f;
+    padding:15px;
+    border-bottom:1px solid #333;
+    position:sticky;
+    top:0;
+    z-index:1000;
+  ">
+    <button onclick="showPage('dash1')" style="margin:0 10px; padding:8px 14px; background:#007acc; color:white; border:none; border-radius:5px; cursor:pointer;">Dashboard 1</button>
+    <button onclick="showPage('dash2')" style="margin:0 10px; padding:8px 14px; background:#444; color:white; border:none; border-radius:5px; cursor:pointer;">Dashboard 2</button>
+  </nav>
+
+  <!-- Dashboard 1 -->
+  <div id="dash1">
+    <!DOCTYPE html>
 <html>
 <head>
   <meta name="databricks-html-version" content="1">
@@ -43,3 +60,25 @@ window.addEventListener('load', function(event) {
  charset="utf-8"></script>
 </body>
 </html>
+  </div>
+  <!-- Dashboard 2 -->
+  <div id="dash2" style="display:none;">
+    <h2 style="color:white; text-align:center; margin-top:40px;">Dashboard 2</h2>
+    <!-- Cole aqui outro dashboard exportado ou qualquer outra visualização HTML -->
+    <p style="text-align:center; color:#ccc;">Exemplo de segunda página ou análise adicional.</p>
+  </div>
+
+  <!-- Script de alternância -->
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('#dash1, #dash2');
+      pages.forEach(p => p.style.display = 'none');
+      document.getElementById(pageId).style.display = 'block';
+
+      // opcional: atualizar botão ativo
+      const buttons = document.querySelectorAll('nav button');
+      buttons.forEach(btn => btn.style.background = '#444');
+      event.target.style.background = '#007acc';
+    }
+  </script>
+</body>
