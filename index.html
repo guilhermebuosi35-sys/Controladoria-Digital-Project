@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Operacional - Controladoria Digital</title>
+    <title>Documentação da Análise - Controladoria Digital</title>
     
     <style>
         * {
@@ -103,8 +103,8 @@
         .dashboard-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%;
             height: 0;
+            padding-bottom: 75%;
             overflow: hidden;
         }
 
@@ -174,7 +174,7 @@
             }
 
             .dashboard-container {
-                padding-bottom: 75%;
+                padding-bottom: 100%;
             }
         }
     </style>
@@ -187,31 +187,29 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <h1>Dashboard Operacional</h1>
-                <p>Análise de Indicadores e Métricas</p>
+                <h1>Documentação da Análise</h1>
+                <p>Notebook com metodologia, código e insights</p>
             </div>
             <nav class="nav-tabs">
-                <a href="operacional.html" class="active">Operacional</a>
+                <a href="operacional.html">Operacional</a>
                 <a href="tatico.html">Tático</a>
                 <a href="estrategico.html">Estratégico</a>
-                <a href="notebook-databricks.html">Documentação</a>
+                <a href="documentacao.html" class="active">Documentação</a>
             </nav>
         </header>
 
         <div class="dashboard-wrapper">
             <div class="dashboard-container">
-                <!-- COLE AQUI O IFRAME DO POWER BI -->
                 <iframe 
-                    title="Dashboard Operacional" 
-                    src="COLE_AQUI_A_URL_DO_POWER_BI"
-                    frameborder="0" 
-                    allowFullScreen="true">
+                    src="notebook-databricks.html"
+                    sandbox="allow-scripts allow-same-origin allow-forms"
+                    loading="lazy">
                 </iframe>
             </div>
         </div>
 
         <footer>
-            <p>Powered by Power BI</p>
+            <p>Powered by Databricks</p>
             <div class="disclaimer">
                 <p>Trabalho acadêmico baseado em case da Controladoria Digital. Todos os dados apresentados são fictícios e criados para fins educacionais.</p>
             </div>
