@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentação da Análise - Controladoria Digital</title>
+    <title>Dashboard Operacional - Controladoria Digital</title>
     
     <style>
         * {
@@ -103,8 +103,8 @@
         .dashboard-container {
             position: relative;
             width: 100%;
+            padding-bottom: 56.25%;
             height: 0;
-            padding-bottom: 75%;
             overflow: hidden;
         }
 
@@ -151,6 +151,14 @@
             opacity: 0.8;
         }
 
+        .disclaimer {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 70px 10px 10px;
@@ -174,7 +182,7 @@
             }
 
             .dashboard-container {
-                padding-bottom: 100%;
+                padding-bottom: 75%;
             }
         }
     </style>
@@ -187,29 +195,39 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <h1>Documentação da Análise</h1>
-                <p>Notebook com metodologia, código e insights</p>
+                <h1>Dashboard Operacional</h1>
+                <p>Análise de Indicadores e Métricas</p>
             </div>
             <nav class="nav-tabs">
-                <a href="operacional.html">Operacional</a>
+                <a href="operacional.html" class="active">Operacional</a>
                 <a href="tatico.html">Tático</a>
                 <a href="estrategico.html">Estratégico</a>
-                <a href="documentacao.html" class="active">Documentação</a>
+                <a href="notebook-databricks.html">Documentação</a>
             </nav>
         </header>
 
         <div class="dashboard-wrapper">
             <div class="dashboard-container">
+                <!-- OPÇÃO 1: Dashboard do Databricks exportado como HTML -->
                 <iframe 
-                    src="notebook-databricks.html"
+                    src="dashboard-operacional.html"
                     sandbox="allow-scripts allow-same-origin allow-forms"
                     loading="lazy">
                 </iframe>
+                
+                <!-- OPÇÃO 2: Power BI (descomente se preferir usar Power BI)
+                <iframe 
+                    title="Dashboard Operacional" 
+                    src="COLE_AQUI_A_URL_DO_POWER_BI"
+                    frameborder="0" 
+                    allowFullScreen="true">
+                </iframe>
+                -->
             </div>
         </div>
 
         <footer>
-            <p>Powered by Databricks</p>
+            <p>Powered by Power BI</p>
             <div class="disclaimer">
                 <p>Trabalho acadêmico baseado em case da Controladoria Digital. Todos os dados apresentados são fictícios e criados para fins educacionais.</p>
             </div>
