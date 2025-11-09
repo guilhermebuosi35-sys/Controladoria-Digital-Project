@@ -117,6 +117,49 @@
             border: none;
         }
 
+        .doc-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 0.6s ease-in 0.3s both;
+        }
+
+        .doc-content {
+            text-align: center;
+        }
+
+        .doc-content h3 {
+            color: #0091ea;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .doc-content p {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .doc-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0091ea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .doc-button:hover {
+            background: #00b8d4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -202,34 +245,33 @@
                 <a href="operacional.html" class="active">Operacional</a>
                 <a href="tatico.html">Tático</a>
                 <a href="estrategico.html">Estratégico</a>
-                <a href="notebook-databricks.html">Documentação</a>
             </nav>
         </header>
 
         <div class="dashboard-wrapper">
             <div class="dashboard-container">
-                <!-- OPÇÃO 1: Dashboard do Databricks exportado como HTML -->
-                <iframe 
-                    src="dashboard-operacional.html"
-                    sandbox="allow-scripts allow-same-origin allow-forms"
-                    loading="lazy">
-                </iframe>
-                
-                <!-- OPÇÃO 2: Power BI (descomente se preferir usar Power BI)
+                <!-- Power BI Dashboard -->
                 <iframe 
                     title="Dashboard Operacional" 
                     src="COLE_AQUI_A_URL_DO_POWER_BI"
                     frameborder="0" 
                     allowFullScreen="true">
                 </iframe>
-                -->
+            </div>
+        </div>
+
+        <div class="doc-card">
+            <div class="doc-content">
+                <h3>Documentação Técnica</h3>
+                <p>Acesse o notebook completo com a análise detalhada, metodologia e código utilizado neste dashboard.</p>
+                <a href="notebook-operacional.html" class="doc-button" target="_blank">Acessar Documentação</a>
             </div>
         </div>
 
         <footer>
-            <p>Powered by Power BI</p>
+            <p>Powered by Power BI e DataBricks</p>
             <div class="disclaimer">
-                <p>Trabalho acadêmico baseado em case da Controladoria Digital. Todos os dados apresentados são fictícios e criados para fins educacionais.</p>
+                <p>Trabalho acadêmico baseado no case da Controladoria Digital. Todos os dados apresentados são fictícios e criados para fins educacionais.</p>
             </div>
         </footer>
     </div>
