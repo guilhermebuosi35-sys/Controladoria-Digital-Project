@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Operacional - Controladoria Digital</title>
-    
+    <title>Dashboard Controladoria Digital</title>
     <style>
         * {
             margin: 0;
@@ -13,267 +12,533 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #00b8d4 0%, #0091ea 100%);
-            min-height: 100vh;
-            padding: 80px 20px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
         }
 
-        .logo-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #00b8d4 0%, #0091ea 100%);
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logos {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
         }
 
-        .logo {
-            height: 40px;
-            width: auto;
+        .logos img {
+            height: 50px;
         }
 
-        .container {
+        .logos .divider {
+            width: 1px;
+            height: 50px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn.active {
+            background: rgba(255,255,255,0.95);
+            color: #0077b6;
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 1.5;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .page-header {
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Info Card */
+        .info-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,119,182,0.2);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .info-card h3 {
+            color: #0077b6;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-frame {
+            width: 100%;
+            min-height: 800px;
+            border: none;
+            display: block;
+        }
+
+        .dashboard-view {
+            display: none;
+        }
+
+        .dashboard-view.active {
+            display: block;
+        }
+
+        .doc-hidden {
+            display: none !important;
+        }
+
+        /* Placeholder */
+        .placeholder {
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .placeholder-icon {
+            width: 80px;
+            height: 80px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .placeholder-icon svg {
+            width: 36px;
+            height: 36px;
+            color: #0077b6;
+            stroke-width: 1.5;
+        }
+
+        .placeholder h3 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .placeholder p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #333;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .disclaimer svg {
+            width: 20px;
+            height: 20px;
+            color: #ff9800;
+            flex-shrink: 0;
+            stroke-width: 1.5;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .footer-content {
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 25px 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .header-content h1 {
-            color: #0091ea;
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-
-        .header-content p {
-            color: #666;
-            font-size: 1em;
-            margin-bottom: 20px;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .nav-tabs a {
-            padding: 10px 20px;
-            background: white;
-            color: #0091ea;
-            text-decoration: none;
-            border-radius: 8px;
-            border: 2px solid #00b8d4;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .nav-tabs a:hover {
-            background: #00b8d4;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .nav-tabs a.active {
-            background: #0091ea;
-            color: white;
-            border-color: #0091ea;
-        }
-
-        .dashboard-wrapper {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            animation: fadeIn 0.6s ease-in;
-        }
-
-        .dashboard-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .dashboard-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .doc-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .doc-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
             border-radius: 12px;
-            padding: 30px;
-            margin-top: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            animation: fadeIn 0.6s ease-in 0.3s both;
-        }
-
-        .doc-content {
-            text-align: center;
-        }
-
-        .doc-content h3 {
-            color: #0091ea;
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .doc-content p {
-            color: #666;
-            font-size: 1em;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .doc-button {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #0091ea;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .doc-button:hover {
-            background: #00b8d4;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        footer {
-            text-align: center;
-            color: white;
-            margin-top: 30px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        footer p {
-            margin: 5px 0;
+        .doc-card:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .doc-icon {
+            background: rgba(255,255,255,0.25);
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .doc-card:hover .doc-icon {
+            background: rgba(255,255,255,0.35);
+        }
+
+        .doc-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 1.5;
+        }
+
+        .doc-info h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .doc-info p {
+            font-size: 13px;
             opacity: 0.9;
-            font-size: 0.9em;
         }
 
-        .disclaimer {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            font-size: 0.85em;
-            opacity: 0.8;
+        .doc-arrow {
+            margin-left: auto;
+            font-size: 24px;
+            transition: transform 0.3s;
         }
 
-        .disclaimer {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            font-size: 0.85em;
+        .doc-card:hover .doc-arrow {
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
             opacity: 0.8;
+            margin: 4px 0;
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 70px 10px 10px;
+            .logos {
+                flex-direction: column;
+                gap: 15px;
             }
 
-            .logo {
-                height: 30px;
+            .logos .divider {
+                display: none;
             }
 
-            .header-content h1 {
-                font-size: 1.3em;
+            .nav-buttons {
+                flex-direction: column;
             }
 
-            .header-content p {
-                font-size: 0.9em;
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
             }
 
-            .nav-tabs a {
-                flex: 1;
-                text-align: center;
-            }
-
-            .dashboard-container {
-                padding-bottom: 75%;
+            .doc-links {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="guilhermebuosi35-sys-patch-1.webp" alt="Controladoria Digital" class="logo">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logos">
+            <img src="logo-sao-judas.png" alt="São Judas" />
+            <div class="divider"></div>
+            <img src="logo-controladoria.png" alt="Controladoria Digital" />
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showView('operacional')" id="btn-operacional">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+                </svg>
+                Operacional
+            </button>
+            <button class="nav-btn" onclick="showView('tatico')" id="btn-tatico">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/>
+                </svg>
+                Tático
+            </button>
+            <button class="nav-btn" onclick="showView('estrategico')" id="btn-estrategico">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                </svg>
+                Estratégico
+            </button>
+        </div>
     </div>
 
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <h1>Dashboard Operacional</h1>
-                <p>Análise de Indicadores e Métricas</p>
-            </div>
-            <nav class="nav-tabs">
-                <a href="operacional.html" class="active">Operacional</a>
-                <a href="tatico.html">Tático</a>
-                <a href="estrategico.html">Estratégico</a>
-            </nav>
-        </header>
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <div class="page-header">
+            <h1 class="page-title" id="page-title">Análise Operacional</h1>
+        </div>
 
-        <div class="dashboard-wrapper">
-            <div class="dashboard-container">
-                <!-- Power BI Dashboard -->
+        <div class="info-card">
+            <h3>Sobre este Dashboard</h3>
+            <p>Dashboard para decisões da Controladoria Digital nas frentes operacional, tática e estratégica, medindo suporte (TME/TMA e produtividade), funil de vendas e CAC, e projeções de receita, custos e margens por produto.</p>
+        </div>
+
+        <div class="dashboard-container">
+            
+            <!-- Dashboard Operacional -->
+            <div class="dashboard-view active" id="view-operacional">
                 <iframe 
+                    class="dashboard-frame"
                     title="Dashboard Operacional" 
-                    src="COLE_AQUI_A_URL_DO_POWER_BI"
-                    frameborder="0" 
-                    allowFullScreen="true">
+                    src="https://app.powerbi.com/reportEmbed?reportId=7120c6fb-2598-487d-b328-a38ead033fc0&autoAuth=true&ctid=f310b526-e195-4805-a55e-67e28f2fefdb"
+                    allowfullscreen>
                 </iframe>
             </div>
+
+            <!-- Dashboard Tático -->
+            <div class="dashboard-view" id="view-tatico">
+                <div class="placeholder">
+                    <div class="placeholder-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/>
+                        </svg>
+                    </div>
+                    <h3>Integração Power BI - Análise Tática</h3>
+                    <p>Insira o código iframe do Power BI aqui</p>
+                    <div class="code-block">
+                        <code>&lt;iframe 
+    class="dashboard-frame"
+    title="Dashboard Tático" 
+    src="SUA_URL_POWERBI_TATICO"
+    allowfullscreen&gt;
+&lt;/iframe&gt;</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Estratégico -->
+            <div class="dashboard-view" id="view-estrategico">
+                <div class="placeholder">
+                    <div class="placeholder-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                        </svg>
+                    </div>
+                    <h3>Integração Power BI - Análise Estratégica</h3>
+                    <p>Insira o código iframe do Power BI aqui</p>
+                    <div class="code-block">
+                        <code>&lt;iframe 
+    class="dashboard-frame"
+    title="Dashboard Estratégico" 
+    src="SUA_URL_POWERBI_ESTRATEGICO"
+    allowfullscreen&gt;
+&lt;/iframe&gt;</code>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="doc-card">
-            <div class="doc-content">
-                <h3>Documentação Técnica</h3>
-                <p>Acesse o notebook completo com a análise detalhada, metodologia e código utilizado neste dashboard.</p>
-                <a href="notebook-operacional.html" class="doc-button" target="_blank">Acessar Documentação</a>
-            </div>
+        <div class="disclaimer">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+            </svg>
+            <p><strong>Disclaimer:</strong> Este dashboard apresenta uma análise da Controladoria Digital utilizando dados fictícios desenvolvidos especialmente para este case acadêmico. Os valores, métricas e indicadores são simulados para fins educacionais e demonstrativos, não representando dados reais de nenhuma empresa.</p>
         </div>
 
-        <footer>
-            <p>Powered by Power BI e DataBricks</p>
-            <div class="disclaimer">
-                <p>Trabalho acadêmico baseado no case da Controladoria Digital. Todos os dados apresentados são fictícios e criados para fins educacionais.</p>
-            </div>
-        </footer>
     </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            
+            <div class="doc-links">
+                <a href="notebook-operacional.html" target="_blank" class="doc-card" id="doc-operacional">
+                    <div class="doc-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
+                        </svg>
+                    </div>
+                    <div class="doc-info">
+                        <h3>Caderno Operacional</h3>
+                        <p>Documentação completa e metodologia</p>
+                    </div>
+                    <div class="doc-arrow">→</div>
+                </a>
+
+                <a href="notebook-tatico.html" target="_blank" class="doc-card doc-hidden" id="doc-tatico">
+                    <div class="doc-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
+                        </svg>
+                    </div>
+                    <div class="doc-info">
+                        <h3>Caderno Tático</h3>
+                        <p>Documentação completa e metodologia</p>
+                    </div>
+                    <div class="doc-arrow">→</div>
+                </a>
+
+                <a href="notebook-estrategico.html" target="_blank" class="doc-card doc-hidden" id="doc-estrategico">
+                    <div class="doc-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
+                        </svg>
+                    </div>
+                    <div class="doc-info">
+                        <h3>Caderno Estratégico</h3>
+                        <p>Documentação completa e metodologia</p>
+                    </div>
+                    <div class="doc-arrow">→</div>
+                </a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Powered by Power BI & Databricks</p>
+                <p>© 2025 Trabalho Acadêmico - Controladoria Digital | São Judas</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const titles = {
+            'operacional': 'Análise Operacional',
+            'tatico': 'Análise Tática',
+            'estrategico': 'Análise Estratégica'
+        };
+
+        function showView(view) {
+            // Atualiza views
+            document.querySelectorAll('.dashboard-view').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById('view-' + view).classList.add('active');
+
+            // Atualiza botões
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('btn-' + view).classList.add('active');
+
+            // Atualiza título
+            document.getElementById('page-title').textContent = titles[view];
+
+            // Atualiza cadernos - esconde todos primeiro
+            document.querySelectorAll('.doc-card').forEach(doc => {
+                doc.classList.add('doc-hidden');
+            });
+            // Mostra apenas o caderno correspondente
+            document.getElementById('doc-' + view).classList.remove('doc-hidden');
+        }
+    </script>
+
 </body>
 </html>
