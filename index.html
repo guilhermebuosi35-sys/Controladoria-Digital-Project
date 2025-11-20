@@ -326,27 +326,55 @@
             margin: 4px 0;
         }
 
+        .open-fullscreen {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,119,182,0.2);
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .open-fullscreen p {
+            color: #555;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .open-fullscreen a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .open-fullscreen a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,119,182,0.3);
+        }
+
+        .open-fullscreen svg {
+            width: 18px;
+            height: 18px;
+        }
+
         @media (max-width: 768px) {
-            .logos {
+            .open-fullscreen {
                 flex-direction: column;
-                gap: 15px;
-            }
-
-            .logos .divider {
-                display: none;
-            }
-
-            .nav-buttons {
-                flex-direction: column;
-            }
-
-            .nav-btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .doc-links {
-                grid-template-columns: 1fr;
+                align-items: flex-start;
             }
         }
     </style>
@@ -395,6 +423,16 @@
             <p>Dashboard para decisões da Controladoria Digital nas frentes operacional, tática e estratégica, medindo suporte (TME/TMA e produtividade), funil de vendas e CAC, e projeções de receita, custos e margens por produto.</p>
         </div>
 
+        <div class="open-fullscreen" id="fullscreen-block">
+            <p>Problemas com visualização? Abra o dashboard em tela cheia ou no Power BI</p>
+            <a href="#" id="fullscreen-link" target="_blank">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 6H5a2 2 0 00-2 2v10a2 2 0 002 2h4m0-12l6 0a2 2 0 012 2v10a2 2 0 01-2 2h-6m0-12v12m0-12L9 6m6 0v12m0 0l6 0"/>
+                </svg>
+                Abrir em Tela Cheia
+            </a>
+        </div>
+
         <div class="dashboard-container">
             
             <!-- Dashboard Operacional -->
@@ -419,23 +457,12 @@
 
             <!-- Dashboard Estratégico -->
             <div class="dashboard-view" id="view-estrategico">
-                <div class="placeholder">
-                    <div class="placeholder-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
-                        </svg>
-                    </div>
-                    <h3>Integração Power BI - Análise Estratégica</h3>
-                    <p>Insira o código iframe do Power BI aqui</p>
-                    <div class="code-block">
-                        <code>&lt;iframe 
-    class="dashboard-frame"
-    title="Dashboard Estratégico" 
-    src="SUA_URL_POWERBI_ESTRATEGICO"
-    allowfullscreen&gt;
-&lt;/iframe&gt;</code>
-                    </div>
-                </div>
+                <iframe 
+                    class="dashboard-frame"
+                    title="Controladoria Digital_Estratégico" 
+                    src="https://app.powerbi.com/reportEmbed?reportId=32147e77-e459-42ad-b6b4-fa89de3591da&autoAuth=true&ctid=f310b526-e195-4805-a55e-67e28f2fefdb"
+                    allowfullscreen>
+                </iframe>
             </div>
 
         </div>
@@ -508,6 +535,12 @@
             'estrategico': 'Análise Estratégica'
         };
 
+        const powerBiLinks = {
+            'operacional': 'https://app.powerbi.com/reportEmbed?reportId=f32b4075-5cd4-4357-9fdb-94632af62921&autoAuth=true&ctid=f310b526-e195-4805-a55e-67e28f2fefdb',
+            'tatico': 'https://app.powerbi.com/reportEmbed?reportId=d9b59f32-0abe-4163-ad55-1fa3ea52054f&autoAuth=true&ctid=f310b526-e195-4805-a55e-67e28f2fefdb',
+            'estrategico': 'https://app.powerbi.com/reportEmbed?reportId=32147e77-e459-42ad-b6b4-fa89de3591da&autoAuth=true&ctid=f310b526-e195-4805-a55e-67e28f2fefdb'
+        };
+
         function showView(view) {
             // Atualiza views
             document.querySelectorAll('.dashboard-view').forEach(el => {
@@ -523,6 +556,9 @@
 
             // Atualiza título
             document.getElementById('page-title').textContent = titles[view];
+
+            // Atualiza link de tela cheia
+            document.getElementById('fullscreen-link').href = powerBiLinks[view];
 
             // Atualiza cadernos - esconde todos primeiro
             document.querySelectorAll('.doc-card').forEach(doc => {
