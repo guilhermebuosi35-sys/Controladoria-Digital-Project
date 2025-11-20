@@ -187,27 +187,48 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
             z-index: 9999;
-            padding: 20px;
-            overflow: auto;
+            overflow: hidden;
         }
 
         .fullscreen-modal.active {
+            display: block;
+        }
+
+        .fullscreen-container {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 60px 20px 80px;
         }
 
         .fullscreen-content {
             position: relative;
-            max-width: 95%;
-            max-height: 95%;
+            transition: transform 0.3s;
+            cursor: zoom-in;
+        }
+
+        .fullscreen-content.zoomed {
+            cursor: zoom-out;
         }
 
         .fullscreen-image {
-            width: 100%;
+            width: auto;
             height: auto;
+            max-width: 100%;
+            max-height: calc(100vh - 140px);
             display: block;
             border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        .fullscreen-content.zoomed .fullscreen-image {
+            max-width: none;
+            max-height: none;
+            width: auto;
+            height: auto;
         }
 
         .fullscreen-close {
@@ -250,11 +271,59 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            z-index: 10001;
         }
 
         .fullscreen-info svg {
             width: 18px;
             height: 18px;
+        }
+
+        .zoom-controls {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10001;
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .zoom-level {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            min-width: 70px;
         }
 
         .page-content {
@@ -516,7 +585,7 @@
                 </svg>
                 Visualização Interativa
             </h3>
-            <p>Os dashboards estão em GIF animado. <strong>Passe o mouse</strong> para pausar a animação ou <strong>clique na imagem</strong> para visualizar em tela cheia com alta qualidade!</p>
+            <p><strong>Passe o mouse</strong> sobre o dashboard para ver a animação ou <strong>clique na imagem</strong> para visualizar em tela cheia com zoom!</p>
         </div>
 
         <div class="dashboard-container">
@@ -524,12 +593,12 @@
             <!-- Dashboard Operacional -->
             <div class="dashboard-view active" id="view-operacional">
                 <div class="image-viewer">
-                    <img src="Operacional.gif" 
+                    <img src="Operacional.jpg" 
                          alt="Dashboard Operacional" 
                          class="dashboard-image"
-                         onmouseover="this.src='Operacional.jpg'" 
-                         onmouseout="this.src='Operacional.gif'"
-                         onclick="openFullscreen(this.src, 'Operacional.gif')">
+                         onmouseover="this.src='Operacional.gif'" 
+                         onmouseout="this.src='Operacional.jpg'"
+                         onclick="openFullscreen('Operacional.jpg')">
                 </div>
             </div>
 
@@ -537,22 +606,22 @@
             <div class="dashboard-view" id="view-tatico">
                 <div class="page-content active" data-page="1">
                     <div class="image-viewer">
-                        <img src="Tático - Page1.gif" 
+                        <img src="Tático1.jpg" 
                              alt="Dashboard Tático - Página 1" 
                              class="dashboard-image"
-                             onmouseover="this.src='Tático1.jpg'" 
-                             onmouseout="this.src='Tático - Page1.gif'"
-                             onclick="openFullscreen(this.src, 'Tático - Page1.gif')">
+                             onmouseover="this.src='Tático - Page1.gif'" 
+                             onmouseout="this.src='Tático1.jpg'"
+                             onclick="openFullscreen('Tático1.jpg')">
                     </div>
                 </div>
                 <div class="page-content" data-page="2">
                     <div class="image-viewer">
-                        <img src="Tático - Page2.gif" 
+                        <img src="Tático2.jpg" 
                              alt="Dashboard Tático - Página 2" 
                              class="dashboard-image"
-                             onmouseover="this.src='Tático2.jpg'" 
-                             onmouseout="this.src='Tático - Page2.gif'"
-                             onclick="openFullscreen(this.src, 'Tático - Page2.gif')">
+                             onmouseover="this.src='Tático - Page2.gif'" 
+                             onmouseout="this.src='Tático2.jpg'"
+                             onclick="openFullscreen('Tático2.jpg')">
                     </div>
                 </div>
                 <div class="page-navigation">
@@ -582,22 +651,22 @@
             <div class="dashboard-view" id="view-estrategico">
                 <div class="page-content active" data-page="1">
                     <div class="image-viewer">
-                        <img src="Estratégico  - Page1.gif" 
+                        <img src="Estratégico1.jpg" 
                              alt="Dashboard Estratégico - Página 1" 
                              class="dashboard-image"
-                             onmouseover="this.src='Estratégico1.jpg'" 
-                             onmouseout="this.src='Estratégico  - Page1.gif'"
-                             onclick="openFullscreen(this.src, 'Estratégico  - Page1.gif')">
+                             onmouseover="this.src='Estratégico  - Page1.gif'" 
+                             onmouseout="this.src='Estratégico1.jpg'"
+                             onclick="openFullscreen('Estratégico1.jpg')">
                     </div>
                 </div>
                 <div class="page-content" data-page="2">
                     <div class="image-viewer">
-                        <img src="Estratégico  - Page2.gif" 
+                        <img src="Estratégico2.jpg" 
                              alt="Dashboard Estratégico - Página 2" 
                              class="dashboard-image"
-                             onmouseover="this.src='Estratégico2.jpg'" 
-                             onmouseout="this.src='Estratégico  - Page2.gif'"
-                             onclick="openFullscreen(this.src, 'Estratégico  - Page2.gif')">
+                             onmouseover="this.src='Estratégico  - Page2.gif'" 
+                             onmouseout="this.src='Estratégico2.jpg'"
+                             onclick="openFullscreen('Estratégico2.jpg')">
                     </div>
                 </div>
                 <div class="page-navigation">
@@ -635,16 +704,27 @@
     </div>
 
     <!-- Fullscreen Modal -->
-    <div class="fullscreen-modal" id="fullscreen-modal" onclick="closeFullscreen()">
+    <div class="fullscreen-modal" id="fullscreen-modal">
         <button class="fullscreen-close" onclick="closeFullscreen()">×</button>
-        <div class="fullscreen-content" onclick="event.stopPropagation()">
-            <img src="" alt="Dashboard em Tela Cheia" class="fullscreen-image" id="fullscreen-img">
+        
+        <div class="zoom-controls">
+            <button class="zoom-btn" onclick="zoomOut()" id="zoom-out">−</button>
+            <div class="zoom-level" id="zoom-level">100%</div>
+            <button class="zoom-btn" onclick="zoomIn()" id="zoom-in">+</button>
+            <button class="zoom-btn" onclick="resetZoom()" title="Resetar Zoom">⟲</button>
         </div>
+
+        <div class="fullscreen-container" onclick="closeFullscreen()">
+            <div class="fullscreen-content" id="fullscreen-content" onclick="event.stopPropagation(); toggleZoom()">
+                <img src="" alt="Dashboard em Tela Cheia" class="fullscreen-image" id="fullscreen-img">
+            </div>
+        </div>
+        
         <div class="fullscreen-info">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6"/>
             </svg>
-            Clique fora da imagem ou no × para fechar
+            Use os botões acima ou clique na imagem para dar zoom • ESC ou clique fora para fechar
         </div>
     </div>
 
@@ -789,13 +869,22 @@
         });
 
         // Fullscreen Modal Functions
-        function openFullscreen(currentSrc, gifSrc) {
+        let zoomScale = 1;
+        const zoomStep = 0.25;
+        const minZoom = 0.5;
+        const maxZoom = 3;
+
+        function openFullscreen(imageSrc) {
             const modal = document.getElementById('fullscreen-modal');
             const img = document.getElementById('fullscreen-img');
             
-            // Sempre mostra o GIF em tela cheia
-            img.src = gifSrc;
+            // Carrega a imagem estática em alta qualidade
+            img.src = imageSrc;
             modal.classList.add('active');
+            
+            // Reset zoom
+            zoomScale = 1;
+            updateZoom();
             
             // Previne scroll do body
             document.body.style.overflow = 'hidden';
@@ -809,12 +898,72 @@
             document.body.style.overflow = 'auto';
         }
 
+        function zoomIn() {
+            if (zoomScale < maxZoom) {
+                zoomScale += zoomStep;
+                updateZoom();
+            }
+        }
+
+        function zoomOut() {
+            if (zoomScale > minZoom) {
+                zoomScale -= zoomStep;
+                updateZoom();
+            }
+        }
+
+        function resetZoom() {
+            zoomScale = 1;
+            updateZoom();
+        }
+
+        function toggleZoom() {
+            const content = document.getElementById('fullscreen-content');
+            if (content.classList.contains('zoomed')) {
+                resetZoom();
+                content.classList.remove('zoomed');
+            } else {
+                zoomScale = 2;
+                updateZoom();
+                content.classList.add('zoomed');
+            }
+        }
+
+        function updateZoom() {
+            const content = document.getElementById('fullscreen-content');
+            const zoomLevel = document.getElementById('zoom-level');
+            
+            content.style.transform = `scale(${zoomScale})`;
+            zoomLevel.textContent = Math.round(zoomScale * 100) + '%';
+            
+            // Atualiza estado dos botões
+            document.getElementById('zoom-out').disabled = zoomScale <= minZoom;
+            document.getElementById('zoom-in').disabled = zoomScale >= maxZoom;
+            
+            // Atualiza cursor
+            if (zoomScale > 1) {
+                content.classList.add('zoomed');
+            } else {
+                content.classList.remove('zoomed');
+            }
+        }
+
         // Fecha com ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeFullscreen();
             }
         });
+
+        // Zoom com scroll do mouse
+        document.getElementById('fullscreen-content').addEventListener('wheel', function(e) {
+            if (e.deltaY < 0) {
+                zoomIn();
+            } else {
+                zoomOut();
+            }
+            e.preventDefault();
+        }, { passive: false });
     </script>
 
 </body>
