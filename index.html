@@ -169,7 +169,92 @@
             width: 100%;
             height: auto;
             display: block;
+            cursor: zoom-in;
+            transition: transform 0.3s;
+        }
+
+        .dashboard-image:hover {
+            transform: scale(1.01);
+        }
+
+        /* Fullscreen Modal */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+        }
+
+        .fullscreen-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .fullscreen-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            font-size: 28px;
+            transition: all 0.3s;
+            z-index: 10000;
+        }
+
+        .fullscreen-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .fullscreen-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fullscreen-info svg {
+            width: 18px;
+            height: 18px;
         }
 
         .page-content {
@@ -431,7 +516,7 @@
                 </svg>
                 Visualização Interativa
             </h3>
-            <p>Os dashboards são apresentados em GIF animado. Passe o mouse sobre a imagem para ver a animação completa dos dados!</p>
+            <p>Os dashboards estão em GIF animado. <strong>Passe o mouse</strong> para pausar a animação ou <strong>clique na imagem</strong> para visualizar em tela cheia com alta qualidade!</p>
         </div>
 
         <div class="dashboard-container">
@@ -439,11 +524,12 @@
             <!-- Dashboard Operacional -->
             <div class="dashboard-view active" id="view-operacional">
                 <div class="image-viewer">
-                    <img src="Operacional.jpg" 
+                    <img src="Operacional.gif" 
                          alt="Dashboard Operacional" 
                          class="dashboard-image"
-                         onmouseover="this.src='Operacional.gif'" 
-                         onmouseout="this.src='Operacional.jpg'">
+                         onmouseover="this.src='Operacional.jpg'" 
+                         onmouseout="this.src='Operacional.gif'"
+                         onclick="openFullscreen(this.src, 'Operacional.gif')">
                 </div>
             </div>
 
@@ -451,20 +537,22 @@
             <div class="dashboard-view" id="view-tatico">
                 <div class="page-content active" data-page="1">
                     <div class="image-viewer">
-                        <img src="Tático1.jpg" 
+                        <img src="Tático - Page1.gif" 
                              alt="Dashboard Tático - Página 1" 
                              class="dashboard-image"
-                             onmouseover="this.src='Tático - Page1.gif'" 
-                             onmouseout="this.src='Tático1.jpg'">
+                             onmouseover="this.src='Tático1.jpg'" 
+                             onmouseout="this.src='Tático - Page1.gif'"
+                             onclick="openFullscreen(this.src, 'Tático - Page1.gif')">
                     </div>
                 </div>
                 <div class="page-content" data-page="2">
                     <div class="image-viewer">
-                        <img src="Tático2.jpg" 
+                        <img src="Tático - Page2.gif" 
                              alt="Dashboard Tático - Página 2" 
                              class="dashboard-image"
-                             onmouseover="this.src='Tático - Page2.gif'" 
-                             onmouseout="this.src='Tático2.jpg'">
+                             onmouseover="this.src='Tático2.jpg'" 
+                             onmouseout="this.src='Tático - Page2.gif'"
+                             onclick="openFullscreen(this.src, 'Tático - Page2.gif')">
                     </div>
                 </div>
                 <div class="page-navigation">
@@ -494,20 +582,22 @@
             <div class="dashboard-view" id="view-estrategico">
                 <div class="page-content active" data-page="1">
                     <div class="image-viewer">
-                        <img src="Estratégico1.jpg" 
+                        <img src="Estratégico  - Page1.gif" 
                              alt="Dashboard Estratégico - Página 1" 
                              class="dashboard-image"
-                             onmouseover="this.src='Estratégico  - Page1.gif'" 
-                             onmouseout="this.src='Estratégico1.jpg'">
+                             onmouseover="this.src='Estratégico1.jpg'" 
+                             onmouseout="this.src='Estratégico  - Page1.gif'"
+                             onclick="openFullscreen(this.src, 'Estratégico  - Page1.gif')">
                     </div>
                 </div>
                 <div class="page-content" data-page="2">
                     <div class="image-viewer">
-                        <img src="Estratégico2.jpg" 
+                        <img src="Estratégico  - Page2.gif" 
                              alt="Dashboard Estratégico - Página 2" 
                              class="dashboard-image"
-                             onmouseover="this.src='Estratégico  - Page2.gif'" 
-                             onmouseout="this.src='Estratégico2.jpg'">
+                             onmouseover="this.src='Estratégico2.jpg'" 
+                             onmouseout="this.src='Estratégico  - Page2.gif'"
+                             onclick="openFullscreen(this.src, 'Estratégico  - Page2.gif')">
                     </div>
                 </div>
                 <div class="page-navigation">
@@ -542,6 +632,20 @@
             <p><strong>Disclaimer:</strong> Este dashboard apresenta uma análise da Controladoria Digital utilizando dados fictícios desenvolvidos especialmente para este case acadêmico. Os valores, métricas e indicadores são simulados para fins educacionais e demonstrativos, não representando dados reais de nenhuma empresa.</p>
         </div>
 
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-modal" id="fullscreen-modal" onclick="closeFullscreen()">
+        <button class="fullscreen-close" onclick="closeFullscreen()">×</button>
+        <div class="fullscreen-content" onclick="event.stopPropagation()">
+            <img src="" alt="Dashboard em Tela Cheia" class="fullscreen-image" id="fullscreen-img">
+        </div>
+        <div class="fullscreen-info">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/>
+            </svg>
+            Clique fora da imagem ou no × para fechar
+        </div>
     </div>
 
     <!-- Footer -->
@@ -682,6 +786,34 @@
         window.addEventListener('DOMContentLoaded', function() {
             goToPage('tatico', 1);
             goToPage('estrategico', 1);
+        });
+
+        // Fullscreen Modal Functions
+        function openFullscreen(currentSrc, gifSrc) {
+            const modal = document.getElementById('fullscreen-modal');
+            const img = document.getElementById('fullscreen-img');
+            
+            // Sempre mostra o GIF em tela cheia
+            img.src = gifSrc;
+            modal.classList.add('active');
+            
+            // Previne scroll do body
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            const modal = document.getElementById('fullscreen-modal');
+            modal.classList.remove('active');
+            
+            // Restaura scroll do body
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fecha com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+            }
         });
     </script>
 
