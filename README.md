@@ -64,3 +64,13 @@ Controladoria-Digital-Project/
 │   └── html/                       # Exports dos notebooks renderizados (Databricks)
 ├── index.html          # Portal de navegação do projeto
 └── README.md           # Documentação oficial
+
+---
+
+## Isenção de Responsabilidade & Contexto Acadêmico
+
+Este projeto foi desenvolvido exclusivamente para fins educacionais e acadêmicos, como requisito para aprovação na Universidade São Judas Tadeu (USJT).
+
+* **Natureza dos Dados:** Os dados apresentados neste repositório são fictícios ou foram anonimizados e descaracterizados para fins de simulação acadêmica. Não representam a realidade financeira ou operacional de nenhuma empresa ativa.
+* **Empresas Terceiras:** A menção a quaisquer empresas terceiras ou parceiras neste projeto serve estritamente como cenário para o estudo de caso. Não há vínculo comercial ou fins lucrativos associados a este repositório.
+* **Uso Permitido:** O código fonte está disponível para consulta e estudo, mas a redistribuição ou uso comercial das marcas citadas é restrita aos seus detentores legais.
