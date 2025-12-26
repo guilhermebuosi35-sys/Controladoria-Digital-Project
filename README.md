@@ -53,6 +53,8 @@ Este projeto utiliza uma arquitetura híbrida de processamento e visualização:
 
 ---
 
+<img src="https://github.com/guilhermebuosi35-sys.png" width=115>
+
 ## 📂 Estrutura do Repositório
 
 ```text
