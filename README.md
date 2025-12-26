@@ -60,6 +60,8 @@ Este projeto foi desenvolvido exclusivamente para fins educacionais e acadêmico
 * **Empresas Terceiras:** A menção a quaisquer empresas terceiras ou parceiras neste projeto serve estritamente como cenário para o estudo de caso. Não há vínculo comercial ou fins lucrativos associados a este repositório.
 * **Uso Permitido:** O código fonte está disponível para consulta e estudo, mas a redistribuição ou uso comercial das marcas citadas é restrita aos seus detentores legais.
 
+---
+
 ## Estrutura do Repositório
 
 ```text
