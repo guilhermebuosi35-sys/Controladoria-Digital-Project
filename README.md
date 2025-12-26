@@ -47,7 +47,6 @@ Este projeto utiliza uma arquitetura híbrida de processamento e visualização:
     * **SQL Avançado:** Uso extensivo de CTEs (Common Table Expressions), Window Functions (`OVER`, `PARTITION BY`) e Funções Estatísticas (`PERCENTILE_CONT`, `STDDEV`).
 * **Visualização:**
     * **Power BI:** Para prototipagem dos dashboards visuais.
-    * **Web (HTML5/CSS3):** Criação de um portal de portfólio para apresentação dos resultados.
 * **Versionamento:**
     * **Git & GitHub Pages:** Hospedagem da documentação e do portal visual.
 
