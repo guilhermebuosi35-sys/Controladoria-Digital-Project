@@ -44,13 +44,21 @@ Este projeto utiliza uma arquitetura híbrida de processamento e visualização:
 
 * **Processamento (ETL & Analytics):**
     * **Databricks (PySpark/SQL):** Para ingestão, limpeza e cálculos estatísticos complexos.
-    * **SQL Avançado:** Uso extensivo de CTEs (Common Table Expressions), Window Functions (`OVER`, `PARTITION BY`) e Funções Estatísticas (`PERCENTILE_CONT`, `STDDEV`).
+    * **SQL Avançado:** Uso extensivo de CTEs (Common Table Expressions), Window Functions (`OVER`, `PARTITION BY`) e Funções Estatísticas (`PERCENTILE_CONT`, `CORR`).
 * **Visualização:**
     * **Power BI:** Para prototipagem dos dashboards visuais.
 * **Versionamento:**
     * **Git & GitHub Pages:** Hospedagem da documentação e do portal visual.
 
 ---
+
+## Isenção de Responsabilidade & Contexto Acadêmico
+
+Este projeto foi desenvolvido exclusivamente para fins educacionais e acadêmicos, como requisito para aprovação na Universidade São Judas Tadeu (USJT).
+
+* **Natureza dos Dados:** Os dados apresentados neste repositório são fictícios ou foram anonimizados e descaracterizados para fins de simulação acadêmica. Não representam a realidade financeira ou operacional de nenhuma empresa ativa.
+* **Empresas Terceiras:** A menção a quaisquer empresas terceiras ou parceiras neste projeto serve estritamente como cenário para o estudo de caso. Não há vínculo comercial ou fins lucrativos associados a este repositório.
+* **Uso Permitido:** O código fonte está disponível para consulta e estudo, mas a redistribuição ou uso comercial das marcas citadas é restrita aos seus detentores legais.
 
 ## Estrutura do Repositório
 
@@ -64,13 +72,3 @@ Controladoria-Digital-Project/
 │   └── html/                       # Exports dos notebooks renderizados (Databricks)
 ├── index.html          # Portal de navegação do projeto
 └── README.md           # Documentação oficial
-
----
-
-## Isenção de Responsabilidade & Contexto Acadêmico
-
-Este projeto foi desenvolvido exclusivamente para fins educacionais e acadêmicos, como requisito para aprovação na Universidade São Judas Tadeu (USJT).
-
-* **Natureza dos Dados:** Os dados apresentados neste repositório são fictícios ou foram anonimizados e descaracterizados para fins de simulação acadêmica. Não representam a realidade financeira ou operacional de nenhuma empresa ativa.
-* **Empresas Terceiras:** A menção a quaisquer empresas terceiras ou parceiras neste projeto serve estritamente como cenário para o estudo de caso. Não há vínculo comercial ou fins lucrativos associados a este repositório.
-* **Uso Permitido:** O código fonte está disponível para consulta e estudo, mas a redistribuição ou uso comercial das marcas citadas é restrita aos seus detentores legais.
